@@ -5,7 +5,10 @@
 	--font-main: 'Roboto', sans-serif;
 	--font-accent: 'Inter', serif;
 
-	--page-bg: radial-gradient(183.2% 113.82% at 100% -12.44%, rgb(254, 228, 213) 0%, rgb(255, 232, 225) 44.999998807907104%, rgb(255, 249, 234) 100%);
+	--page-bg: radial-gradient(183.2% 113.82% at 100% -12.44%,
+	#fee4d5 0%,
+	#ffe8e1 45%,
+	#fff9ea 100%);
 	--text-color: #303030;
     --dark: #1c1c1c;
     --peach: #ffae95;
