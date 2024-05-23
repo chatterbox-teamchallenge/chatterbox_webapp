@@ -17,7 +17,7 @@ const FormButton = ({ text, isValid }: Btn) => {
     // };
     
     return (
-        <button type='button' className={`formbtn ${isValid ? 'formbtn--disable' : 'formbtn'}`} disabled={isValid} >      
+        <button type='button' className={`formbtn ${isValid ? 'formbtn' : 'formbtn--disable'}`} disabled={isValid} >      
       {text}
     </button>
   )

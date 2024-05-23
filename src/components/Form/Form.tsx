@@ -2,12 +2,10 @@ import { ZodType, z } from "zod";
 import Input from "../Input/Input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useState } from "react";
-import Button from "../Button/Button";
+import { useState } from "react";
 import "../../styles/components/_form.scss";
 import FormButton from "../Button/FormButton";
 import Checkbox from "../Checkbox/Checkbox";
-
 
 interface FormProps {
   type: string;
@@ -105,7 +103,7 @@ export default function Form({ type, isConfirmed }: FormProps) {
             registerType={register("email")}
             handleBlur={() => updateFieldStates("email")}
           />
-          <FormButton text={"Next"} isValid={!isValid} />
+          <FormButton text={"Next"} isValid={isValid} />
         </div>
       )}
       {type === "register" && isConfirmed && (
@@ -136,14 +134,9 @@ export default function Form({ type, isConfirmed }: FormProps) {
             checked={state.isChecked}
             handleClick={handleCheck}
           />
+          <FormButton text={"Next"} isValid={isValid} />
         </div>
       )}
-      <div
-        className={`submit__button ${(isValid && state.isChecked) && "valid"}`}
-        onClick={handleSubmit(submitData)}
-      >
-        {/* <Button text="Next" /> */}
-      </div>
     </form>
   );
 }
