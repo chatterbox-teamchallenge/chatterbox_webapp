@@ -6,18 +6,18 @@ type Btn = {
 }
 
 const FormButton = ({ text, isValid }: Btn) => {
-    const [isDisable, setIsDisable] = useState(true)
+    
 
-    const enableButton = (e: any) => {
-        if (isValid) {
-            setIsDisable(false);
-            e.target.classList.remove('formbtn--disable');
-        }
+    // const enableButton = (e: any) => {
+    //     if (isValid) {
+    //         setIsDisable(false);
+    //         e.target.classList.remove('formbtn--disable');
+    //     }
         
-    };
+    // };
     
     return (
-        <button type='button' className='formbtn formbtn--disable' disabled={isDisable} >      
+        <button type='button' className={`formbtn ${isValid ? 'formbtn--disable' : 'formbtn'}`} disabled={isValid} >      
       {text}
     </button>
   )

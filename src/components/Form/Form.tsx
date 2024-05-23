@@ -105,7 +105,7 @@ export default function Form({ type, isConfirmed }: FormProps) {
             registerType={register("email")}
             handleBlur={() => updateFieldStates("email")}
           />
-          {/* <FormButton text={"Next"} isValid={!isValid} /> */}
+          <FormButton text={"Next"} isValid={!isValid} />
         </div>
       )}
       {type === "register" && isConfirmed && (
@@ -142,7 +142,7 @@ export default function Form({ type, isConfirmed }: FormProps) {
         className={`submit__button ${(isValid && state.isChecked) && "valid"}`}
         onClick={handleSubmit(submitData)}
       >
-        <Button text="Next" />
+        {/* <Button text="Next" /> */}
       </div>
     </form>
   );
