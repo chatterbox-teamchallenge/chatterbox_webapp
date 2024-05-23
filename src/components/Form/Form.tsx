@@ -5,7 +5,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import Button from "../Button/Button";
 import "../../styles/components/_form.scss";
+import FormButton from "../Button/FormButton";
 import Checkbox from "../Checkbox/Checkbox";
+
 
 interface FormProps {
   type: string;
@@ -24,7 +26,9 @@ type FormData = {
   repeatPassword?: string;
 };
 
+
 export default function Form({ type, isConfirmed }: FormProps) {
+
   const updateState = (newState: Partial<IState>): void =>
     setState((prevState) => ({ ...prevState, ...newState }));
   const [state, setState] = useState<IState>({
@@ -101,6 +105,7 @@ export default function Form({ type, isConfirmed }: FormProps) {
             registerType={register("email")}
             handleBlur={() => updateFieldStates("email")}
           />
+          {/* <FormButton text={"Next"} isValid={!isValid} /> */}
         </div>
       )}
       {type === "register" && isConfirmed && (
