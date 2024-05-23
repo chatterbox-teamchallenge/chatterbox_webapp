@@ -134,7 +134,7 @@ export default function Form({ type, isConfirmed }: FormProps) {
             checked={state.isChecked}
             handleClick={handleCheck}
           />
-          <FormButton text={"Next"} isValid={isValid} />
+          <FormButton text={"Next"} isValid={(isValid && state.isChecked) ? true : false} />
         </div>
       )}
     </form>
