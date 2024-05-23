@@ -5,12 +5,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import Button from "../Button/Button";
 import "../../styles/components/_form.scss";
-<<<<<<< Updated upstream
 import FormButton from "../Button/FormButton";
 import Checkbox from "../Checkbox/Checkbox";
-=======
-// import FormButton from "../Button/FormButton";
->>>>>>> Stashed changes
+
 
 interface FormProps {
   type: string;
