@@ -1,19 +1,21 @@
 import React from 'react'
 import '../../styles/components/_start.scss'
-
+import { useNavigate } from 'react-router-dom';
 
 
 import logo from '../../img/logo.png'
 import google from '../../icons/google.png'
 import Button from '../../components/Button/Button'
 const Start = () => {
+  const navigate = useNavigate();
+  
   return (
     <div className='start__container container'>
       <img src={logo} alt="logo" className='start__logo'/>
       <h1 className='start__title'>Chatterbox</h1>
       <h3 className='start__subtitle'>Log in</h3>
 
-      <div className='start__btns'>
+      <div className='start__btns' onClick={() => {navigate('register')}}>
         <div className='start__btn'>
           <Button text='With email' />
         </div>
