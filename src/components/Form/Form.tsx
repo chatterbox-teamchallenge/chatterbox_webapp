@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import Button from "../Button/Button";
 import "../../styles/components/_form.scss";
+import FormButton from "../Button/FormButton";
 
 interface formProps {
   type: string;
@@ -21,6 +22,10 @@ type FormData = {
   password?: string;
   repeatPassword?: string;
 };
+
+type Btn = {
+  status: string;
+}
 
 export default function Form({ type, isConfirmed }: formProps) {
   const updateState = (newState: Partial<IState>): void =>

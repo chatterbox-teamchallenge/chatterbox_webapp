@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../../styles/components/_button.scss'
 type Btn = {
-    text: string;
+  text: string;
 }
 
-const Button = ({text}: Btn) => {
+const Button = ({ text}: Btn) => {
+
   return (
       <button className='btn'>      
       {text}
