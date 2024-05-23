@@ -5,14 +5,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import Button from "../Button/Button";
 import "../../styles/components/_form.scss";
+import Checkbox from "../Checkbox/Checkbox";
 
-interface formProps {
+interface FormProps {
   type: string;
   isConfirmed: boolean;
 }
 
 interface IState {
   inputStates: any;
+  isChecked: boolean;
 }
 
 type FormData = {
@@ -22,7 +24,7 @@ type FormData = {
   repeatPassword?: string;
 };
 
-export default function Form({ type, isConfirmed }: formProps) {
+export default function Form({ type, isConfirmed }: FormProps) {
   const updateState = (newState: Partial<IState>): void =>
     setState((prevState) => ({ ...prevState, ...newState }));
   const [state, setState] = useState<IState>({
@@ -32,6 +34,7 @@ export default function Form({ type, isConfirmed }: formProps) {
       passwordState: "default",
       repeatPasswordState: "default",
     },
+    isChecked: false,
   });
 
   const formSchema: ZodType<FormData> = z
@@ -49,17 +52,11 @@ export default function Form({ type, isConfirmed }: formProps) {
   const {
     register,
     handleSubmit,
-    watch,
     trigger,
     formState: { errors, isValid },
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
   });
-
-  const email = watch("email");
-  const name = watch("name");
-  const password = watch("password");
-  const repeatPassword = watch("repeatPassword");
 
   const isFieldFilled = (fieldName: string | undefined) => !!fieldName;
 
@@ -83,12 +80,16 @@ export default function Form({ type, isConfirmed }: formProps) {
     const fieldState = await isFieldCorrect(`${field}`, field);
 
     const newInputStates = {
-      [`${field}State`]: fieldState
+      [`${field}State`]: fieldState,
     };
 
     updateState({ inputStates: { ...state.inputStates, ...newInputStates } });
   };
-  
+
+  function handleCheck() {
+    updateState({ isChecked: !state.isChecked });
+  }
+
   return (
     <form className="form__wrapper" onSubmit={handleSubmit(submitData)}>
       {type === "register" && !isConfirmed && (
@@ -125,12 +126,17 @@ export default function Form({ type, isConfirmed }: formProps) {
             registerType={register("repeatPassword")}
             handleBlur={() => updateFieldStates("repeatPassword")}
           />
+          <Checkbox
+            text="Remember me"
+            checked={state.isChecked}
+            handleClick={handleCheck}
+          />
         </div>
       )}
       <div
-        className={`submit__button ${isValid && "valid"}`}
+        className={`submit__button ${(isValid && state.isChecked) && "valid"}`}
         onClick={handleSubmit(submitData)}
-      > 
+      >
         <Button text="Next" />
       </div>
     </form>
