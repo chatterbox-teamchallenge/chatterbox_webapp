@@ -9,7 +9,7 @@ type Btn = {
 const FormButton = ({ text, isValid, onClick }: Btn) => {
     
     return (
-        <button type='button' className={`formbtn ${isValid ? 'formbtn--disable' : 'formbtn'}`} disabled={isValid} onClick={onClick}>      
+        <button type='button' className={`formbtn ${isValid ? 'formbtn' : 'formbtn--disable'}`} disabled={isValid} onClick={onClick}>      
       {text}
     </button>
   )

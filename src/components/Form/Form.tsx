@@ -2,14 +2,12 @@ import { ZodType, z } from "zod";
 import Input from "../Input/Input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useState } from "react";
-import Button from "../Button/Button";
+import { useState } from "react";
 import "../../styles/components/_form.scss";
 import FormButton from "../Button/FormButton";
 import Checkbox from "../Checkbox/Checkbox";
 import ModalWrapper from "../Modal/ModalWrapper";
 // import Modal from "../Modal/Modal";
-
 
 interface FormProps {
   type: string;
@@ -123,7 +121,7 @@ const [isModalVisible, setIsModalVisible] = useState(false)
           />
           <FormButton
             text={"Next"}
-            isValid={!isValid}
+            isValid={isValid}
             onClick={toggleModal}
             />
           <ModalWrapper isModalVisible={isModalVisible} onBackdropClick={toggleModal}/>
@@ -157,14 +155,9 @@ const [isModalVisible, setIsModalVisible] = useState(false)
             checked={state.isChecked}
             handleClick={handleCheck}
           />
+          <FormButton text={"Next"} isValid={(isValid && state.isChecked) ? true : false} />
         </div>
       )}
-      <div
-        className={`submit__button ${(isValid && state.isChecked) && "valid"}`}
-        onClick={handleSubmit(submitData)}
-      >
-        {/* <Button text="Next" /> */}
-      </div>
     </form>
   );
 }
