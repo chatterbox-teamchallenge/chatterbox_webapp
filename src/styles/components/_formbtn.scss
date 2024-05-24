@@ -15,5 +15,9 @@ text-align: center;
 &--disable{
     background-color: var(--secondary);
 }
+
+&:hover{
+    box-shadow: var(--box-shadow-btn);
+}
 }
 

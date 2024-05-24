@@ -7,6 +7,7 @@ const Register = () => {
     <div className="register container">
       <img className="register__logo" src={logo} alt="logo" />
       <Form type="register" isConfirmed={false} />
+    
     </div>
   );
 };
