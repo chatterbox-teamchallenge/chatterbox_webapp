@@ -7,6 +7,8 @@ import Button from "../Button/Button";
 import "../../styles/components/_form.scss";
 import FormButton from "../Button/FormButton";
 import Checkbox from "../Checkbox/Checkbox";
+import ModalWrapper from "../Modal/ModalWrapper";
+// import Modal from "../Modal/Modal";
 
 
 interface FormProps {
@@ -18,6 +20,11 @@ interface IState {
   inputStates: any;
   isChecked: boolean;
 }
+
+// interface OpenModal {
+//   isOpen: boolean;
+// }
+
 
 type FormData = {
   name?: string;
@@ -94,6 +101,15 @@ export default function Form({ type, isConfirmed }: FormProps) {
     updateState({ isChecked: !state.isChecked });
   }
 
+
+const [isModalVisible, setIsModalVisible] = useState(false)
+
+  const toggleModal = () => {
+    setIsModalVisible(wasModalVisible => !wasModalVisible);
+  }
+
+
+
   return (
     <form className="form__wrapper" onSubmit={handleSubmit(submitData)}>
       {type === "register" && !isConfirmed && (
@@ -105,7 +121,12 @@ export default function Form({ type, isConfirmed }: FormProps) {
             registerType={register("email")}
             handleBlur={() => updateFieldStates("email")}
           />
-          <FormButton text={"Next"} isValid={!isValid} />
+          <FormButton
+            text={"Next"}
+            isValid={!isValid}
+            onClick={toggleModal}
+            />
+          <ModalWrapper isModalVisible={isModalVisible} onBackdropClick={toggleModal}/>
         </div>
       )}
       {type === "register" && isConfirmed && (

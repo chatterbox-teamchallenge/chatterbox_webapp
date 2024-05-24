@@ -16,12 +16,12 @@ const Start = () => {
       <h3 className='start__subtitle'>Log in</h3>
 
       <div className='start__btns' onClick={() => {navigate('register')}}>
-        <div className='start__btn'>
+        <div className='btn__container'>
           <Button text='With email' />
         </div>
-        <div className='start__btn'>
-          <img src={google} alt="google" />
-          <Button text='With Google' />
+        <div className='btn__container'>
+          <img src={google} alt="google"  className='btn__icon'/>
+          <Button text='With Google'  />
         </div>
         
       </div>
