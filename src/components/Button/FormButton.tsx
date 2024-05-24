@@ -2,22 +2,14 @@ import React, { useState } from 'react'
 import '../../styles/components/_button.scss'
 type Btn = {
     text: string;
-    isValid: boolean;
+  isValid: boolean;
+  onClick: () => void;
 }
 
-const FormButton = ({ text, isValid }: Btn) => {
-    
-
-    // const enableButton = (e: any) => {
-    //     if (isValid) {
-    //         setIsDisable(false);
-    //         e.target.classList.remove('formbtn--disable');
-    //     }
-        
-    // };
+const FormButton = ({ text, isValid, onClick }: Btn) => {
     
     return (
-        <button type='button' className={`formbtn ${isValid ? 'formbtn--disable' : 'formbtn'}`} disabled={isValid} >      
+        <button type='button' className={`formbtn ${isValid ? 'formbtn--disable' : 'formbtn'}`} disabled={isValid} onClick={onClick}>      
       {text}
     </button>
   )
