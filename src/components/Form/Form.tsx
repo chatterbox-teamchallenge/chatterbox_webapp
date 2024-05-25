@@ -17,12 +17,8 @@ interface FormProps {
 interface IState {
   inputStates: any;
   isChecked: boolean;
+  isModalVisible: boolean;
 }
-
-// interface OpenModal {
-//   isOpen: boolean;
-// }
-
 
 type FormData = {
   name?: string;
@@ -30,7 +26,6 @@ type FormData = {
   password?: string;
   repeatPassword?: string;
 };
-
 
 export default function Form({ type, isConfirmed }: FormProps) {
 
@@ -44,6 +39,7 @@ export default function Form({ type, isConfirmed }: FormProps) {
       repeatPasswordState: "default",
     },
     isChecked: false,
+    isModalVisible: false,
   });
 
   const formSchema: ZodType<FormData> = z
@@ -99,14 +95,9 @@ export default function Form({ type, isConfirmed }: FormProps) {
     updateState({ isChecked: !state.isChecked });
   }
 
-
-const [isModalVisible, setIsModalVisible] = useState(false)
-
   const toggleModal = () => {
-    setIsModalVisible(wasModalVisible => !wasModalVisible);
+    updateState({isModalVisible: !state.isModalVisible});
   }
-
-
 
   return (
     <form className="form__wrapper" onSubmit={handleSubmit(submitData)}>
@@ -124,7 +115,7 @@ const [isModalVisible, setIsModalVisible] = useState(false)
             isValid={isValid}
             onClick={toggleModal}
             />
-          <ModalWrapper isModalVisible={isModalVisible} onBackdropClick={toggleModal}/>
+          <ModalWrapper isModalVisible={state.isModalVisible} onBackdropClick={toggleModal}/>
         </div>
       )}
       {type === "register" && isConfirmed && (
@@ -155,7 +146,7 @@ const [isModalVisible, setIsModalVisible] = useState(false)
             checked={state.isChecked}
             handleClick={handleCheck}
           />
-          <FormButton text={"Next"} isValid={(isValid && state.isChecked) ? true : false} />
+          <FormButton text={"Next"} isValid={(isValid && state.isChecked) ? true : false} onClick={handleSubmit(submitData)}/>
         </div>
       )}
     </form>
