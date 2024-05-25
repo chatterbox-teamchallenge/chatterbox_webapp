@@ -5,5 +5,12 @@
 
     .btn {
         width: 100%;
+        margin-top: 24px;
+    }
+
+    .forgot__password__link {
+        margin-top: 8px;
+        color: var(--link);
+        text-decoration: none;
     }
 }

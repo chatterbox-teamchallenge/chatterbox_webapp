@@ -23,7 +23,7 @@ const Modal: React.FC<ModalProps> = ({onBackdropClick}) => {
                Go to confirm your account
                 </p>
                 <div className='btn__container'>
-                <Button text={'OK'}  onClick={onBackdropClick} isValid/>
+                <Button text={'OK'}  onClick={onBackdropClick}/>
                 </div>
            
     

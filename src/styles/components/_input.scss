@@ -3,10 +3,14 @@
     display: flex;  
     width: 100%;
 
+    &:not(:last-of-type) {
+        margin-bottom: 24px;
+    }
+
     img {
         position: absolute;
         right: 16px;
-        top: 18%;
+        top: 25%;
         transition: all .3s;
     }
 
@@ -20,8 +24,8 @@
     padding: 12px 40px 12px 8px;
     border-radius: 5px;
     border: 1px solid var(--secondary);
-    margin-bottom: 24px;
     width: 100%;
+    background-color: #fff;
 
     &.default, &.password {
         border: 1px solid var(--secondary);

@@ -4,7 +4,6 @@ import password from "../../icons/password.png";
 import passwordHidden from "../../icons/password_hidden.png";
 import correct from "../../icons/correct.png";
 import alert from "../../icons/alert.png";
-import "../../styles/components/_input.scss";
 
 interface InputProps {
   placeholder?: string;
