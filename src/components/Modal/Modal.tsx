@@ -1,24 +1,8 @@
 // import React from 'react'
 import '../../styles/components/_modal.scss'
-import ModalButton from '../Button/ModalButton'
+import Button from '../Button/Button'
 
-// const Modal = ({closeModal}: any) => {
-//     return (
-//     <div className='modal__background'>
-//         <div className='modal__container'>
-//           <p className='modal__text'>
-//               The letter was sent to your email address.
-//               <br />
-//               Go to confirm your account
-//           </p>
-//           <Button text={'OK'} />
-//     </div>
-//     </div>
-    
-//   )
-// }
 
-// export default Modal
 
 import React from 'react'
 import  ReactDOM  from 'react-dom';
@@ -39,7 +23,7 @@ const Modal: React.FC<ModalProps> = ({onBackdropClick}) => {
                Go to confirm your account
                 </p>
                 <div className='btn__container'>
-                <ModalButton text={'OK'}  onClick={onBackdropClick}/>
+                <Button text={'OK'}  onClick={onBackdropClick} isValid/>
                 </div>
            
     

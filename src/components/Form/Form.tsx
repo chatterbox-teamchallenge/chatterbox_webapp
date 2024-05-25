@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import "../../styles/components/_form.scss";
-import FormButton from "../Button/FormButton";
+import Button from "../Button/Button";
 import Checkbox from "../Checkbox/Checkbox";
 import ModalWrapper from "../Modal/ModalWrapper";
 // import Modal from "../Modal/Modal";
@@ -110,7 +110,7 @@ export default function Form({ type, isConfirmed }: FormProps) {
             registerType={register("email")}
             handleBlur={() => updateFieldStates("email")}
           />
-          <FormButton
+          <Button
             text={"Next"}
             isValid={isValid}
             onClick={toggleModal}
@@ -146,7 +146,7 @@ export default function Form({ type, isConfirmed }: FormProps) {
             checked={state.isChecked}
             handleClick={handleCheck}
           />
-          <FormButton text={"Next"} isValid={(isValid && state.isChecked) ? true : false} onClick={handleSubmit(submitData)}/>
+          <Button text={"Next"} isValid={(isValid && state.isChecked) ? true : false} onClick={handleSubmit(submitData)}/>
         </div>
       )}
     </form>

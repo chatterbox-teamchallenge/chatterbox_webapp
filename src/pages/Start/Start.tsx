@@ -17,11 +17,11 @@ const Start = () => {
 
       <div className='start__btns' onClick={() => {navigate('register')}}>
         <div className='btn__container'>
-          <Button text='With email' />
+          <Button text='With email' onClick={()=>{}}  isValid/>
         </div>
         <div className='btn__container'>
           <img src={google} alt="google"  className='btn__icon'/>
-          <Button text='With Google'  />
+          <Button text='With Google'  onClick={()=>{}}  isValid/>
         </div>
         
       </div>
