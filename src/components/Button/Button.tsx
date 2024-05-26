@@ -8,17 +8,17 @@ type Btn = {
 const Button = ({ text, isValid, onClick }: Btn) => {
   const [isDisabled, setIsDisabled] = useState(false);
 
-  function handleDisabled() {
-    if (isValid) {
-      setIsDisabled(false);
-    } else if (isValid === undefined) {
-      setIsDisabled(false);
-    } else {
-      setIsDisabled(true);
-    }
-  }
-
   useEffect(() => {
+    function handleDisabled() {
+      if (isValid) {
+        setIsDisabled(false);
+      } else if (isValid === undefined) {
+        setIsDisabled(false);
+      } else {
+        setIsDisabled(true);
+      }
+    }
+
     handleDisabled();
   }, [isValid]);
 
