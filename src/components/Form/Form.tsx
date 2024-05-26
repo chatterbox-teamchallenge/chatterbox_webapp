@@ -3,20 +3,17 @@ import Input from "../Input/Input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-import "../../styles/components/_form.scss";
 import Button from "../Button/Button";
-import Checkbox from "../Checkbox/Checkbox";
 import ModalWrapper from "../Modal/ModalWrapper";
-// import Modal from "../Modal/Modal";
+import { Link } from "react-router-dom";
 
 interface FormProps {
   type: string;
-  isConfirmed: boolean;
+  isConfirmed?: boolean;
 }
 
 interface IState {
   inputStates: any;
-  isChecked: boolean;
   isModalVisible: boolean;
 }
 
@@ -28,7 +25,6 @@ type FormData = {
 };
 
 export default function Form({ type, isConfirmed }: FormProps) {
-
   const updateState = (newState: Partial<IState>): void =>
     setState((prevState) => ({ ...prevState, ...newState }));
   const [state, setState] = useState<IState>({
@@ -38,7 +34,6 @@ export default function Form({ type, isConfirmed }: FormProps) {
       passwordState: "default",
       repeatPasswordState: "default",
     },
-    isChecked: false,
     isModalVisible: false,
   });
 
@@ -49,10 +44,18 @@ export default function Form({ type, isConfirmed }: FormProps) {
       password: z.string().min(6).optional(),
       repeatPassword: z.string().min(6).optional(),
     })
-    .refine((data: any) => data.password === data.repeatPassword, {
-      message: "Passwords do not match",
-      path: ["repeatPassword"],
-    });
+    .refine(
+      (data: any) => {
+        if (data.password && data.repeatPassword) {
+          return data.password === data.repeatPassword;
+        }
+        return true;
+      },
+      {
+        message: "Passwords do not match",
+        path: ["repeatPassword"],
+      }
+    );
 
   const {
     register,
@@ -91,13 +94,9 @@ export default function Form({ type, isConfirmed }: FormProps) {
     updateState({ inputStates: { ...state.inputStates, ...newInputStates } });
   };
 
-  function handleCheck() {
-    updateState({ isChecked: !state.isChecked });
-  }
-
   const toggleModal = () => {
-    updateState({isModalVisible: !state.isModalVisible});
-  }
+    updateState({ isModalVisible: !state.isModalVisible });
+  };
 
   return (
     <form className="form__wrapper" onSubmit={handleSubmit(submitData)}>
@@ -110,12 +109,11 @@ export default function Form({ type, isConfirmed }: FormProps) {
             registerType={register("email")}
             handleBlur={() => updateFieldStates("email")}
           />
-          <Button
-            text={"Next"}
-            isValid={isValid}
-            onClick={toggleModal}
-            />
-          <ModalWrapper isModalVisible={state.isModalVisible} onBackdropClick={toggleModal}/>
+          <Button text={"Next"} isValid={isValid} onClick={toggleModal} />
+          <ModalWrapper
+            isModalVisible={state.isModalVisible}
+            onBackdropClick={toggleModal}
+          />
         </div>
       )}
       {type === "register" && isConfirmed && (
@@ -141,12 +139,37 @@ export default function Form({ type, isConfirmed }: FormProps) {
             registerType={register("repeatPassword")}
             handleBlur={() => updateFieldStates("repeatPassword")}
           />
-          <Checkbox
-            text="Remember me"
-            checked={state.isChecked}
-            handleClick={handleCheck}
+          <Button
+            text={"Next"}
+            isValid={isValid}
+            onClick={handleSubmit(submitData)}
           />
-          <Button text={"Next"} isValid={(isValid && state.isChecked) ? true : false} onClick={handleSubmit(submitData)}/>
+        </div>
+      )}
+      {type === "login" && (
+        <div className="form">
+          <Input
+            type="name"
+            state={state.inputStates.nameState}
+            placeholder="Your email or name"
+            registerType={register("name")}
+            handleBlur={() => updateFieldStates("name")}
+          />
+          <Input
+            type="password"
+            state={state.inputStates.passwordState}
+            placeholder="Password"
+            registerType={register("password")}
+            handleBlur={() => updateFieldStates("password")}
+          />
+          <Link to="/">
+            <p className="forgot__password__link">Forgor password?</p>
+          </Link>
+          <Button
+            text="Next"
+            isValid={isValid}
+            onClick={handleSubmit(submitData)}
+          />
         </div>
       )}
     </form>
