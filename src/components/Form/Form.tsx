@@ -6,6 +6,7 @@ import { useState } from "react";
 import Button from "../Button/Button";
 import ModalWrapper from "../Modal/ModalWrapper";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 interface FormProps {
   type: string;
@@ -68,8 +69,60 @@ export default function Form({ type, isConfirmed }: FormProps) {
 
   const isFieldFilled = (fieldName: string | undefined) => !!fieldName;
 
+  const registerUser = (data: FormData) => {
+    axios
+    .post(
+      `https://chatterbox-backend-wxgv.onrender.com/users/signup`,
+      { email: data.email, username: data.name, password: data.password }
+    )
+    .then((res) => {
+      console.log(res);
+    })  
+    .catch((error) => {
+      console.error(error);
+    });
+    // axios
+    //   .post(
+    //     `${process.env.REACT_APP_DOMAIN}${process.env.REACT_APP_ENDPOINT_SIGNUP}`,
+    //     { email: data.email, username: data.name, password: data.password }
+    //   )
+    //   .then((res) => {
+    //     console.log(res);
+    //   })  
+    //   .catch((error) => {
+    //     console.error(error);
+    //   });
+  };
+
+  const loginUser = (data: FormData) => {
+    axios
+    .post(
+      `https://chatterbox-backend-wxgv.onrender.com/users/login`,
+      { username: data.name, password: data.password }
+    )
+    .then((res) => {
+      console.log(res);
+    })  
+    .catch((error) => {
+      console.error(error);
+    });
+    // axios
+    // .post(
+    //   `${process.env.REACT_APP_DOMAIN}${process.env.REACT_APP_ENDPOINT_LOGIN}`,
+    //   { username: data.name, password: data.password }
+    // )
+    // .then((res) => {
+    //   console.log(res);
+    // })  
+    // .catch((error) => {
+    //   console.error(error);
+    // });
+  }
+
   const submitData = (data: FormData) => {
     // SEND DATA TO THE SERVER
+    if (type === 'register') registerUser(data);
+    else if (type === 'login') loginUser(data); 
   };
 
   const isFieldCorrect = async (
@@ -118,6 +171,13 @@ export default function Form({ type, isConfirmed }: FormProps) {
       )}
       {type === "register" && isConfirmed && (
         <div className="form">
+          <Input
+            type="email"
+            state={state.inputStates.emailState}
+            placeholder="Your email"
+            registerType={register("email")}
+            handleBlur={() => updateFieldStates("email")}
+          />
           <Input
             type="name"
             state={state.inputStates.nameState}
